@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥗</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Mades Food </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --burnt-red: #9B343E;
+            --terracotta: #D77B76;
+            --coral: #EBC0BA;
+            --white: #FFFFFF;
+            --light-gray: #F8F8F8;
+            --dark-gray: #333333;
+            --shadow: rgba(139, 69, 19, 0.15);
+            --shadow-strong: rgba(139, 69, 19, 0.25);
+            --gradient-primary: linear-gradient(135deg, var(--burnt-red), var(--terracotta));
+            --gradient-secondary: linear-gradient(135deg, var(--terracotta), var(--coral));
+            /* Adjusted for better flow */
+            --gradient-accent: linear-gradient(45deg, var(--coral), var(--burnt-red));
+            --green-accent: #6B8E23;
+            /* Added for natural feel */
+            --light-green: #9ACD32;
+            /* Added for freshness */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow-strong);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--coral);
+            border-radius: 2px;
+            transform: scaleX(0);
+            animation: logoUnderline 2s ease forwards;
+        }
+
+        @keyframes logoUnderline {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            color: var(--coral);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            margin-top: 70px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" fill="white" opacity="0.1"><path d="M0,0V60l20,10L60,40l20,20L120,20l20,40L180,40l20,20L240,30l20,30L300,40l20,20L360,20l20,40L420,30l20,30L480,40l20,20L540,20l20,40L600,30l20,30L660,40l20,20L720,20l20,40L780,30l20,30L840,40l20,20L900,20l20,40L960,30l20,30L1020,40l20,20L1080,20l20,40L1140,30l60,30V0Z"/></svg>') repeat-x;
+            animation: wave 8s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-50px);
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, white, var(--coral));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            line-height: 1.8;
+        }
+
+        .slogan {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 127, 80, 0.3);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 127, 80, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            font-size: 3rem;
+            /* Made emojis larger */
+            opacity: 0.8;
+            /* Made emojis slightly transparent */
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+
+            66% {
+                transform: translateY(10px) rotate(240deg);
+            }
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        /* Color Psychology Section */
+        .color-psychology {
+            background: var(--light-gray);
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .color-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .color-card:hover::before {
+            left: 100%;
+        }
+
+        .color-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px var(--shadow-strong);
+        }
+
+        .color-sample {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-sample::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .color-card:hover .color-sample::after {
+            opacity: 1;
+        }
+
+        .burnt-red-sample {
+            background: linear-gradient(135deg, #7B141E, #9B343E);
+            /* Changed from --gradient-primary */
+        }
+
+        .terracotta-sample {
+            background: linear-gradient(135deg, #B75B56, #D77B76);
+            /* Changed from linear-gradient */
+        }
+
+        .coral-sample {
+            background: linear-gradient(135deg, #CB7D74, #EBC0BA);
+            /* Changed from --gradient-accent */
+        }
+
+        .color-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--burnt-red);
+            font-weight: 600;
+        }
+
+        /* Mission & Vision */
+        .mission-vision {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mv-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mv-card h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mv-card h3::before {
+            content: '🎯';
+            font-size: 2.5rem;
+        }
+
+        .mv-card:last-child h3::before {
+            content: '🚀';
+        }
+
+        /* Quality Policies & Objectives */
+        .policies-objectives {
+            background: var(--white);
+            padding: 6rem 2rem;
+            color: var(--dark-gray);
+        }
+
+        .policies-objectives .section-title {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .po-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .po-card {
+            background: var(--light-gray);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            border-top: 5px solid var(--coral);
+            /* Accent line */
+        }
+
+        .po-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px var(--shadow-strong);
+        }
+
+        .po-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--burnt-red);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .po-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .po-card ul li {
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .po-card ul li::before {
+            content: '✔️';
+            /* Checkmark for policies */
+            position: absolute;
+            left: 0;
+            color: var(--green-accent);
+            /* Green checkmark */
+            font-size: 1.2rem;
+            top: 2px;
+        }
+
+        .po-card.objectives ul li::before {
+            content: '🌟';
+            /* Star for objectives */
+            color: var(--coral);
+            /* Coral star */
+        }
+
+
+        /* Services */
+        .services {
+            background: var(--light-gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px var(--shadow-strong);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-card h3 {
+            color: var(--burnt-red);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* Menu */
+        .menu {
+            background: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px var(--shadow-strong);
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .menu-item:hover::before {
+            opacity: 0.05;
+        }
+
+        .menu-placeholder {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .menu-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .menu-item h4 {
+            color: var(--burnt-red);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .menu-item p {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .nutrition-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .nutrition-item {
+            background: var(--light-gray);
+            padding: 0.8rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nutrition-item:hover {
+            background: var(--coral);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 1rem;
+            background: var(--coral);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .contact-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--burnt-red);
+            color: white;
+            text-align: center;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Scroll Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--burnt-red);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 4px 20px var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .slogan {
+                font-size: 1.3rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .mv-grid,
+            .po-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-grid,
+            .services-grid,
+            .menu-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 8rem 1rem 4rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* New Process Section Styles */
+        .our-process {
+            background: var(--white);
+            /* Puedes ajustar el color de fondo */
+            padding: 6rem 2rem;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .our-process .section-title {
+            margin-bottom: 2rem;
+        }
+
+        .process-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .process-image {
+            max-width: 50%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 45px var(--shadow-strong);
+            /* Usar la variable de sombra existente */
+            transition: transform 0.3s ease;
+        }
+
+        .process-image:hover {
+            transform: scale(1.02);
+        }
+
+        .process-description {
+            max-width: 45%;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        /* Media Query para pantallas más pequeñas para apilar elementos */
+        @media (max-width: 768px) {
+            .process-content {
+                flex-direction: column;
+                /* Vuelve a apilar los elementos en pantallas pequeñas */
+            }
+
+            .process-image,
+            .process-description {
+                max-width: 100%;
+                /* Ocupan todo el ancho disponible */
+            }
+
+            .process-description {
+                text-align: center;
+                /* Centra el texto en pantallas pequeñas */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="logo">Mades Food</div>
+            <ul class="nav-links">
+                <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#nosotros"><i class="fas fa-users"></i> Nosotros</a></li>
+                <li><a href="#politicas-objetivos"><i class="fas fa-clipboard-list"></i> Calidad y Objetivos</a></li>
+                <li><a href="#servicios"><i class="fas fa-concierge-bell"></i> Servicios</a></li>
+                <li><a href="#menu"><i class="fas fa-utensils"></i> Menú</a></li>
+                <li><a href="#our-process"><i class="fas fa-cogs"></i> Nuestro Proceso</a></li>
+                <li><a href="#contacto"><i class="fas fa-phone"></i> Contacto</a></li>
+
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="floating-element">🥗</div>
+        <div class="floating-element">🌱</div>
+        <div class="floating-element">🍎</div>
+        <div class="hero-content">
+            <h1>Alimenta tu bienestar</h1>
+            <p>Descubre una nueva forma de nutrir tu cuerpo y alma con ingredientes naturales, frescos y llenos de
+                propósito.</p>
+            <div class="slogan">Fresco, sano y con propósito</div>
+            <a href="#menu" class="cta-button">
+                <i class="fas fa-arrow-right"></i> Explorar Menú
+            </a>
+        </div>
+    </section>
+
+    <section class="color-psychology animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">Psicología de Nuestros Colores</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-sample burnt-red-sample"></div>
+                    <h3>Rojo Quemado</h3>
+                    <p>Transmite confianza, estabilidad y tradición. Evoca la conexión con la tierra y ingredientes
+                        naturales, generando sensación de seguridad y autenticidad en nuestros productos.</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-sample terracotta-sample"></div>
+                    <h3>Terracota</h3>
+                    <p>Representa calidez, comodidad y acogida. Este color earthly crea un ambiente familiar y
+                        reconfortante, invitando a los clientes a sentirse como en casa.</p>
+                </div>
+                <div class="color-card">
+                    <div class="color-sample coral-sample"></div>
+                    <h3>Coral</h3>
+                    <p>Simboliza vitalidad, energía y salud. Estimula el apetito de manera saludable y transmite la
+                        frescura y vitalidad que ofrecen nuestros alimentos nutritivos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-vision animate-on-scroll" id="nosotros">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Nuestro Propósito</h2>
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <h3>Misión</h3>
+                    <p>Nuestra misión es promover un estilo de vida equilibrado y consciente a través de una experiencia
+                        culinaria que combina sabor, frescura y sostenibilidad. Ofrecemos alimentos saludables
+                        elaborados con ingredientes naturales, locales y de alta calidad, adaptados a diversas
+                        necesidades nutricionales.</p>
+                </div>
+                <div class="mv-card">
+                    <h3>Visión</h3>
+                    <p>Ser un referente en alimentación saludable y sostenible, reconocidos por transformar la forma en
+                        que las personas se relacionan con la comida. Aspiramos a expandir nuestro impacto, creando una
+                        comunidad que valore el bienestar y la innovación gastronómica.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="policies-objectives animate-on-scroll" id="politicas-objetivos">
+        <div class="container">
+            <h2 class="section-title">Nuestras Políticas y Objetivos</h2>
+            <div class="po-grid">
+                <div class="po-card">
+                    <h3><i class="fas fa-award"></i> Políticas de Calidad del Restaurante Saludable</h3>
+                    <ul>
+                        <li><strong>Calidad en los ingredientes:</strong> Garantizamos el uso de ingredientes frescos,
+                            naturales, orgánicos y de origen local siempre que sea posible, asegurando así el valor
+                            nutricional y el sabor auténtico de cada plato.</li>
+                        <li><strong>Higiene y seguridad alimentaria:</strong> Cumplimos rigurosamente con las normas
+                            sanitarias en la manipulación, preparación y almacenamiento de alimentos, priorizando la
+                            salud y seguridad de nuestros clientes.</li>
+                        <li><strong>Atención al cliente con excelencia:</strong> Ofrecemos un servicio cálido, eficiente
+                            y personalizado, comprometidos con la satisfacción total del cliente y con una actitud
+                            abierta a sugerencias y mejoras.</li>
+                        <li><strong>Innovación en el menú:</strong> Actualizamos constantemente nuestras recetas y
+                            opciones
+                            alimenticias para adaptarnos a nuevas tendencias, preferencias dietéticas y descubrimientos
+                            nutricionales.</li>
+                        <li><strong>Compromiso con la sostenibilidad:</strong> Adoptamos prácticas responsables con el
+                            medio ambiente, minimizando el desperdicio, utilizando materiales reciclables y promoviendo
+                            el
+                            consumo consciente.</li>
+                        <li><strong>Mejora continua:</strong> Evaluamos de forma periódica nuestros procesos, productos
+                            y
+                            servicios, fomentando una cultura de mejora continua y capacitación constante del personal.
+                        </li>
+                    </ul>
+                </div>
+                <div class="po-card objectives">
+                    <h3><i class="fas fa-bullseye"></i> Objetivos de Nuestro Restaurante Saludable</h3>
+                    <ul>
+                        <li>Ofrecer alimentos nutritivos y de alta calidad, elaborados con ingredientes frescos,
+                            orgánicos y locales, para satisfacer las necesidades de clientes conscientes de su salud.
+                        </li>
+                        <li>Promover hábitos alimenticios saludables mediante un menú equilibrado, información
+                            nutricional clara y asesoría alimentaria cuando sea necesario.</li>
+                        <li>Garantizar una experiencia excepcional al cliente, enfocándonos en un servicio amable,
+                            eficiente y personalizado que fomente la fidelidad y el boca a boca positivo.</li>
+                        <li>Reducir el impacto ambiental adoptando prácticas sostenibles como el uso de empaques
+                            biodegradables, gestión responsable de residuos y reducción del desperdicio alimentario.
+                        </li>
+                        <li>Expandir nuestra presencia en el mercado local, posicionándonos como una marca líder en
+                            alimentación saludable y construyendo alianzas con proveedores y productores conscientes.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services animate-on-scroll" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Menús Personalizados</h3>
+                    <p>Creamos planes alimenticios adaptados a tus necesidades nutricionales específicas y objetivos de
+                        salud.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-truck"></i></div>
+                    <h3>Entrega a Domicilio</h3>
+                    <p>Llevamos la frescura directamente a tu puerta con nuestro servicio de entrega ecológico y
+                        puntual.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-user-md"></i></div>
+                    <h3>Asesoría Nutricional</h3>
+                    <p>Consultas personalizadas con nuestros expertos en nutrición para optimizar tu bienestar.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-leaf"></i></div>
+                    <h3>Ingredientes Orgánicos</h3>
+                    <p>Seleccionamos cuidadosamente ingredientes locales, orgánicos y de temporada para cada
+                        preparación.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>App Móvil</h3>
+                    <p>Gestiona tus pedidos, seguimiento nutricional y progreso de salud desde nuestra aplicación
+                        intuitiva.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h3>Meal Prep</h3>
+                    <p>Preparación semanal de comidas balanceadas listas para consumir cuando las necesites.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu animate-on-scroll" id="menu">
+        <div class="container">
+            <h2 class="section-title">Nuestro Menú Saludable</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-placeholder">🥗</div>
+                    <div class="menu-content">
+                        <h4>Bowl de Quinoa y Vegetales</h4>
+                        <p>Quinoa orgánica con vegetales de temporada, aguacate y aderezo de tahini.</p>
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">
+                                <strong>420 cal</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>18g proteína</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>12g fibra</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>22g carbohidratos</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-placeholder">🐟</div>
+                    <div class="menu-content">
+                        <h4>Salmón con Espárragos</h4>
+                        <p>Salmón al vapor con espárragos orgánicos y salsa de limón y hierbas frescas.</p>
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">
+                                <strong>380 cal</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>35g proteína</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>8g fibra</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>10g carbohidratos</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-placeholder">🍀</div>
+                    <div class="menu-content">
+                        <h4>Crema De Espinaca</h4>
+                        <p>Espinacas al vapor con espárragos orgánicos y crema de leche y hierbas frescas.</p>
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">
+                                <strong>435 cal</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>15g proteína</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>17g fibra</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>5g carbohidratos</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-placeholder">🥑</div>
+                    <div class="menu-content">
+                        <h4>Tostadas de Aguacate y Huevo</h4>
+                        <p>Tostadas de pan integral con aguacate, huevo pochado y semillas de chía.</p>
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">
+                                <strong>320 cal</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>15g proteína</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>7g fibra</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>30g carbohidratos</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-placeholder">🍓</div>
+                    <div class="menu-content">
+                        <h4>Smoothie Verde Energizante</h4>
+                        <p>Mezcla de espinaca, plátano, manzana, leche de almendras y semillas de lino.</p>
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">
+                                <strong>250 cal</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>5g proteína</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>6g fibra</strong>
+                            </div>
+                            <div class="nutrition-item">
+                                <strong>40g carbohidratos</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="our-process" class="our-process animate-on-scroll">
+        <div class="container">
+            <h2 class="section-title">Nuestro Proceso de Calidad</h2>
+            <div class="process-content">
+                <img src="WhatsApp Image 2025-05-28 at 14.31.49.jpeg" alt="Diagrama de Flujo de Calidad"
+                    class="process-image animate-on-scroll">
+                <p class="process-description animate-on-scroll">
+                    En este organigrama, me veo como el Gerente General, el centro de todo. Mi equipo clave incluye al
+                    Chef Ejecutivo, Compras, Marketing y el Contador. Fuera, están nuestros Cocineros, Meseros
+                    (liderados por el Jefe de Meseros), Baristas, el Encargado de Almacén y el Cajero. Cada uno es
+                    esencial para que la operación fluya y ofrezcamos la mejor experiencia.
+                    Este organigrama me muestra la esencia de nuestro restaurante. Como Gerente General, soy el centro,
+                    conectado con el Chef, Compras, Marketing y Contabilidad. Desde ahí, veo a nuestros equipos clave:
+                    Cocineros, Meseros, Baristas, Almacén y Cajeros. Cada uno es vital, trabajando en conjunto para
+                    ofrecer la mejor experiencia a nuestros clientes.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="contact animate-on-scroll" id="contacto">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Contáctanos</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Ubicación</h3>
+                    <p>Funza, Cundinamarca, Colombia</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Correo Electrónico</h3>
+                    <p>madesfoodsaludable@gmail.com</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <h3>Teléfono</h3>
+                    <p>+57 (315) 698-9652</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mades Food. Todos los derechos reservados.</p>
+            <p>Diseñado con <i class="fas fa-heart" style="color: var(--coral);"></i> para tu bienestar.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close menu on mobile after clicking a link
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const animateOnScrollElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                } else {
+                    entry.target.classList.remove('animate'); // Optional: remove animation when out of view
+                }
+            });
+        }, {threshold: 0.1}); // Adjust threshold as needed
+
+        animateOnScrollElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Loading Overlay
+        window.addEventListener('load', () => {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('fade-out');
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 500); // Wait for fade-out animation to complete
+        });
+    </script>
+</body>
+
+</html>
